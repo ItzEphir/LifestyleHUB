@@ -1,3 +1,4 @@
+@file:Suppress("UnstableApiUsage") // for dependencyResolutionManagement
 pluginManagement {
     repositories {
         google {
