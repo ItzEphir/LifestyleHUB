@@ -1,5 +1,5 @@
 plugins {
-    id("java-library")
+    `java-library`
     alias(libs.plugins.jetbrainsKotlinJvm)
 }
 
@@ -10,4 +10,11 @@ java {
 
 kotlin {
     jvmToolchain(17)
+}
+
+dependencies{
+    implementation(project(":common"))
+    
+    implementation(libs.coroutines)
+    implementation(libs.koin.core)
 }

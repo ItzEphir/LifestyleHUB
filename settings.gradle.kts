@@ -1,4 +1,5 @@
-@file:Suppress("UnstableApiUsage") // for dependencyResolutionManagement
+// for dependencyResolutionManagement
+@file:Suppress("UnstableApiUsage")
 pluginManagement {
     repositories {
         google {
@@ -22,6 +23,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "LifestyleHUB"
 include(":app")
-include(":feature:CurrentWeather")
+include(":feature:currentWeather")
 include(":domain")
 include(":data")
+include(":api:weather")
+include(":common")
