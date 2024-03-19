@@ -10,11 +10,6 @@ import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.RedirectResponseException
 import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.request.get
-import io.ktor.client.request.host
-import io.ktor.http.URLProtocol
-import io.ktor.http.URLProtocol.Companion
-import io.ktor.http.Url
-import java.net.URL
 
 internal class WeatherServiceImpl(
     private val client: HttpClient,

@@ -36,15 +36,15 @@ sealed class WeatherUiStatus(
     
     sealed class Clouds(override val description: String) : WeatherUiStatus(description) {
         @Parcelize
-        data object Few : Clouds("few clouds: 11-25%")
+        data object Few : Clouds("few clouds")
         
         @Parcelize
-        data object Scattered : Clouds("scattered clouds: 25-50%")
+        data object Scattered : Clouds("scattered clouds")
         
         @Parcelize
-        data object Broken : Clouds("broken clouds: 51-84%")
+        data object Broken : Clouds("broken clouds")
         
         @Parcelize
-        data object Overcast : Clouds("overcast clouds: 85-100%")
+        data object Overcast : Clouds("overcast clouds")
     }
 }

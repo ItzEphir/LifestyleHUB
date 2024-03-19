@@ -10,10 +10,6 @@ import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.RedirectResponseException
 import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.request.get
-import io.ktor.http.ContentType
-import io.ktor.http.URLProtocol
-import io.ktor.http.URLProtocol.Companion
-import io.ktor.http.contentType
 
 internal class GeoServiceImpl(private val client: HttpClient) : GeoService {
     override suspend fun getCityName(

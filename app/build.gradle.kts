@@ -47,9 +47,6 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    signingConfigs{
-        val openWeatherApiKey="dbaad18638759894a816af331cfb5672"
-    }
 }
 
 dependencies {
