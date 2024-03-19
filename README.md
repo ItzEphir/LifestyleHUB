@@ -11,4 +11,4 @@
 
 ## [Архитектура проекта](/docs/Architecture.md)
 
-## [Зависимости](docs/Dependency Decisions.md)
+## [Зависимости](docs/DependencyDecisions.md)
