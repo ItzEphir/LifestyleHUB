@@ -13,15 +13,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ephirium.lifestylehub.feature.currentweather.R
-import com.ephirium.lifestylehub.feature.currentweather.location.LocationClient
 import com.ephirium.lifestylehub.feature.currentweather.presentation.state.WeatherUiState.*
 import com.ephirium.lifestylehub.feature.currentweather.presentation.viewmodel.WeatherViewModel
 import com.ephirium.lifestylehub.feature.currentweather.ui.components.Weather
-import com.ephirium.lifestylehub.feature.currentweather.utils.Shimmer
+import com.ephirium.lifestylehub.androidBase.Shimmer
+import com.ephirium.lifestylehub.androidBase.location.LocationClient
+import com.ephirium.lifestylehub.feature.currentweather.R.string
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 
@@ -33,7 +36,7 @@ fun WeatherWidget(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     
     LaunchedEffect(key1 = Unit, block = {
-        viewModel.load(locationClient)
+        viewModel.load(locationClient, Locale.current.language)
     })
     
     when (uiState) {
@@ -47,21 +50,23 @@ fun WeatherWidget(
         is Success                                            -> Weather(modifier = Modifier.fillMaxWidth(),
             weatherUiModel = (uiState as Success).weatherUiModel,
             onRefreshClick = {
-                viewModel.reload(locationClient)
+                viewModel.reload(locationClient, Locale.current.language)
             })
         
         is Error, is Timeout, is HttpError, is LocationDenied -> Error(text = when (uiState) {
-            is LocationDenied        -> "Location denied"
-            is Timeout, is HttpError -> "Network error"
-            is Error                 -> "Something went wrong..."
+            is LocationDenied        -> stringResource(string.location_denied)
+            is Timeout, is HttpError -> stringResource(string.network_error)
+            is Error                 -> stringResource(string.something_went_wrong)
             else                     -> ""
-        }, onRefreshClick = {viewModel.reload(locationClient)})
+        }, onRefreshClick = { viewModel.reload(locationClient, Locale.current.language) })
     }
 }
 
 @Composable
 private fun Error(text: String, onRefreshClick: () -> Unit) {
-    Card(shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth().height(128.dp)) {
+    Card(shape = RoundedCornerShape(24.dp), modifier = Modifier
+        .fillMaxWidth()
+        .height(128.dp)) {
         Box(modifier = Modifier.fillMaxSize()) {
             Text(
                 text = text,

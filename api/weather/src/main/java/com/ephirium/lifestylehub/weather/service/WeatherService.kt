@@ -4,5 +4,5 @@ import com.ephirium.lifestylehub.common.ResponseResult
 import com.ephirium.lifestylehub.weather.dto.weatherResponse.WeatherResponse
 
 interface WeatherService {
-    suspend fun getWeather(lat: Float, lon: Float): ResponseResult<WeatherResponse>
+    suspend fun getWeather(lat: Float, lon: Float, lang: String): ResponseResult<WeatherResponse>
 }

@@ -1,7 +1,7 @@
 package com.ephirium.lifestylehub
 
 import android.app.Application
-import com.ephirium.lifestylehub.feature.currentweather.di.currentWeatherFeatureModule
+import com.ephirium.lifestylehub.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -17,7 +17,7 @@ class Application : Application() {
         startKoin {
             androidLogger()
             androidContext(this@Application)
-            modules(currentWeatherFeatureModule)
+            modules(appModule)
         }
     }
 }

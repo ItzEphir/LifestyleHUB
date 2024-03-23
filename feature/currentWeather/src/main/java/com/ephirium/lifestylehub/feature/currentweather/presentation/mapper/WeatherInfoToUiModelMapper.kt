@@ -1,13 +1,11 @@
 package com.ephirium.lifestylehub.feature.currentweather.presentation.mapper
 
-import com.ephirium.lifestylehub.domain.model.WeatherInfo
-import com.ephirium.lifestylehub.domain.model.WeatherStatus
+import com.ephirium.lifestylehub.domain.model.weather.WeatherInfo
+import com.ephirium.lifestylehub.domain.model.weather.WeatherStatus
 import com.ephirium.lifestylehub.feature.currentweather.R
 import com.ephirium.lifestylehub.feature.currentweather.presentation.model.WeatherUiModel
-import com.ephirium.lifestylehub.feature.currentweather.presentation.model.WeatherUiStatus
-import com.ephirium.lifestylehub.feature.currentweather.presentation.model.WeatherUiStatus.*
-import com.ephirium.lifestylehub.feature.currentweather.presentation.model.WeatherUiStatus.Clouds.*
-import com.ephirium.lifestylehub.feature.currentweather.presentation.model.WeatherUiStatus.Rain.*
+import com.ephirium.lifestylehub.feature.currentweather.presentation.model.WeatherUiModel.IconMode.DAY
+import com.ephirium.lifestylehub.feature.currentweather.presentation.model.WeatherUiModel.IconMode.NIGHT
 import kotlin.math.roundToInt
 
 fun WeatherInfo.toUiModel() = WeatherUiModel(
@@ -17,6 +15,7 @@ fun WeatherInfo.toUiModel() = WeatherUiModel(
     feelsLike = feelsLike.roundToInt().temperatureToString(),
     status = status.toUi(),
     iconId = mapIconId(iconId),
+    iconMode = mapIconColor(iconId),
     city = city
 )
 
@@ -26,24 +25,10 @@ private fun Int.temperatureToString() = if (this > 0) {
     "$this°C"
 }
 
-private fun WeatherStatus.toUi(): WeatherUiStatus = when (this) {
-    is WeatherStatus.Thunderstorm -> Thunderstorm(description)
-    is WeatherStatus.Drizzle      -> Drizzle(description)
-    is WeatherStatus.Rain         -> when (this) {
-        is WeatherStatus.Rain.Common   -> Common(description)
-        is WeatherStatus.Rain.Freezing -> Freezing
-        is WeatherStatus.Rain.Shower   -> Shower(description)
-    }
-    
-    is WeatherStatus.Snow         -> Snow(description)
-    is WeatherStatus.Atmosphere   -> Atmosphere(description)
-    is WeatherStatus.Clear        -> Clear
-    is WeatherStatus.Clouds       -> when (this) {
-        is WeatherStatus.Clouds.Few       -> Few
-        is WeatherStatus.Clouds.Scattered -> Scattered
-        is WeatherStatus.Clouds.Broken    -> Broken
-        is WeatherStatus.Clouds.Overcast  -> Overcast
-    }
+private fun WeatherStatus.toUi(): String {
+    return StringBuilder(description).apply {
+        this[0] = this[0].uppercaseChar()
+    }.toString()
 }
 
 private fun mapIconId(domainId: String) = when (domainId) {
@@ -66,4 +51,9 @@ private fun mapIconId(domainId: String) = when (domainId) {
     "50d" -> R.drawable.d50
     "50n" -> R.drawable.n50
     else  -> throw IllegalArgumentException("Illegal icon id")
+}
+
+private fun mapIconColor(iconId: String) = when(iconId.last()){
+    'd' -> DAY
+    else -> NIGHT
 }

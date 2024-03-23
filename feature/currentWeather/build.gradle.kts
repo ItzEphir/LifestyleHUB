@@ -1,7 +1,7 @@
 plugins {
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.jetbrainsKotlinParcelize)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.android)
+    alias(libs.plugins.parcelize)
 }
 
 android {
@@ -44,17 +44,17 @@ dependencies {
     implementation(project(":common"))
     implementation(project(":domain"))
     implementation(project(":data"))
+    implementation(project(":androidBase"))
     
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.androidx.work.runtime.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -67,5 +67,5 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
     
-    implementation("com.google.android.gms:play-services-location:21.2.0")
+    implementation(libs.google.play.services.location)
 }

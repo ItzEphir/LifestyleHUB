@@ -1,6 +1,6 @@
 plugins {
     `java-library`
-    alias(libs.plugins.jetbrainsKotlinJvm)
+    alias(libs.plugins.kotlin.jvm)
 }
 
 java {
@@ -16,6 +16,7 @@ dependencies{
     implementation(project(":common"))
     implementation(project(":domain"))
     implementation(project(":api:weather"))
+    implementation(project(":api:places"))
     
     implementation(libs.coroutines)
     implementation(libs.koin.core)
@@ -25,4 +26,8 @@ dependencies{
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.client.serialization)
     implementation(libs.ktor.client.serialization.json)
+    
+    implementation(libs.paging.common)
+    
+    implementation(libs.junit)
 }

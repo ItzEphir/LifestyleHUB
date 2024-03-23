@@ -12,7 +12,7 @@ import com.ephirium.lifestylehub.common.ResponseResult.Ok
  * @return Result with type R
  */
 @Suppress("UNCHECKED_CAST")
-inline fun <reified T, reified R> ResponseResult<T>.map(block: (T) -> R): ResponseResult<R & Any> =
+inline fun <reified T, reified R> ResponseResult<T>.map(block: (T) -> R) =
     when (this) {
         is Ok -> Ok(block(data))
         else  -> this as ResponseResult<R>

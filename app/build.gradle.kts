@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.application)
+    alias(libs.plugins.android)
 }
 
 android {
@@ -21,6 +21,10 @@ android {
     }
     
     buildTypes {
+        all{
+            buildConfigField("String", "WEATHER_API_KEY", "\"dbaad18638759894a816af331cfb5672\"")
+            buildConfigField("String", "PLACES_API_KEY", "\"fsq3NTnGNMK/0cje7JYavQTeDK24QqQBUEb3UzhVu2L8/hg=\"")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -37,6 +41,7 @@ android {
         jvmTarget = "17"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
     composeOptions {
@@ -51,7 +56,9 @@ android {
 
 dependencies {
     
+    implementation(project(":androidBase"))
     implementation(project(":feature:currentWeather"))
+    implementation(project(":feature:recommendations"))
     
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

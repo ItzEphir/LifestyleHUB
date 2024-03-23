@@ -1,15 +1,15 @@
 package com.ephirium.lifestylehub.feature.currentweather.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ephirium.lifestylehub.common.ResponseResult
+import com.ephirium.lifestylehub.common.ResponseResult.TimeoutError
 import com.ephirium.lifestylehub.common.on
 import com.ephirium.lifestylehub.common.onOk
-import com.ephirium.lifestylehub.domain.usecase.GetCurrentWeatherUseCase
-import com.ephirium.lifestylehub.feature.currentweather.location.LocationClient
-import com.ephirium.lifestylehub.feature.currentweather.location.LocationClient.LocationException
+import com.ephirium.lifestylehub.androidBase.location.LocationClient
+import com.ephirium.lifestylehub.androidBase.location.LocationClient.LocationException
+import com.ephirium.lifestylehub.domain.usecases.GetCurrentWeatherUseCase
 import com.ephirium.lifestylehub.feature.currentweather.presentation.mapper.toUiModel
 import com.ephirium.lifestylehub.feature.currentweather.presentation.state.WeatherUiState
 import com.ephirium.lifestylehub.feature.currentweather.presentation.state.WeatherUiState.*
@@ -30,36 +30,36 @@ class WeatherViewModel(
     val uiState: StateFlow<WeatherUiState> = savedStateHandle.getStateFlow(UI_STATE_KEY, Loading)
     
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
-    fun load(locationClient: LocationClient) {
-        if(uiState.value != Loading){
+    fun load(locationClient: LocationClient, languageCode: String) {
+        if (uiState.value != Loading) {
             return
         }
         savedStateHandle[UI_STATE_KEY] = Loading
         viewModelScope.launch {
             getLocation(locationClient).flatMapLatest { latitudeAndLongitude ->
                 val (latitude, longitude) = latitudeAndLongitude
-                getCurrentWeather(latitude, longitude)
-            }.timeout(10.seconds).catch{
-                if(it is TimeoutCancellationException && uiState.value == Loading){
+                getCurrentWeather(latitude, longitude, languageCode)
+            }.timeout(10.seconds).catch {
+                if (it is TimeoutCancellationException && uiState.value == Loading) {
                     savedStateHandle[UI_STATE_KEY] = Timeout
                 }
             }.collect { responseResult ->
-                Log.w("ViewModel", responseResult.toString())
                 responseResult.onOk { weatherInfo ->
                     savedStateHandle[UI_STATE_KEY] = Success(weatherInfo.toUiModel())
-                }.on<ResponseResult.HttpError> {
+                }.on<ResponseResult.HttpResponse> {
                     savedStateHandle[UI_STATE_KEY] = HttpError(it.code)
+                }.on<TimeoutError> {
+                    savedStateHandle[UI_STATE_KEY] = Timeout
                 }.on<ResponseResult.Error> {
-                    it.exception.printStackTrace()
                     savedStateHandle[UI_STATE_KEY] = Error(it.exception)
                 }
             }
         }
     }
     
-    fun reload(locationClient: LocationClient){
+    fun reload(locationClient: LocationClient, languageCode: String) {
         savedStateHandle[UI_STATE_KEY] = Loading
-        load(locationClient)
+        load(locationClient, languageCode)
     }
     
     private fun getLocation(locationClient: LocationClient) =

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feels_like">Feels like</string>
+    <string name="location_denied">Location access denied</string>
+    <string name="network_error">Network error</string>
+    <string name="something_went_wrong">Something went wrong…</string>
+</resources>

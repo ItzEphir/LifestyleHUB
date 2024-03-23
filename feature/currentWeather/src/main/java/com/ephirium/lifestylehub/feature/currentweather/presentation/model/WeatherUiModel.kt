@@ -10,7 +10,10 @@ data class WeatherUiModel(
     val maxTemperature: String,
     val minTemperature: String,
     val feelsLike: String,
-    val status: WeatherUiStatus,
+    val status: String,
     @DrawableRes val iconId: Int,
+    val iconMode: IconMode,
     val city: String,
-) : Parcelable
+) : Parcelable{
+    enum class IconMode{ DAY, NIGHT }
+}

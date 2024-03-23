@@ -1,7 +1,7 @@
 plugins {
     `java-library`
-    alias(libs.plugins.jetbrainsKotlinJvm)
-    alias(libs.plugins.jetbrainsKotlinSerialization)
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.serialization)
 }
 
 java {

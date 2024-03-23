@@ -1,6 +1,6 @@
 plugins {
     `java-library`
-    alias(libs.plugins.jetbrainsKotlinJvm)
+    alias(libs.plugins.kotlin.jvm)
 }
 
 java {
@@ -17,4 +17,6 @@ dependencies{
     
     implementation(libs.coroutines)
     implementation(libs.koin.core)
+    
+    implementation(libs.paging.common)
 }
