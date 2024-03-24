@@ -120,7 +120,7 @@ fun Weather(
                     }
                     
                     Text(
-                        text = "${stringResource(id = R.string.feels_like)} ${weatherUiModel.feelsLike}",
+                        text = "${stringResource(id = com.ephirium.lifestylehub.androidBase.R.string.feels_like)} ${weatherUiModel.feelsLike}",
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier
                             .align(Alignment.BottomEnd)

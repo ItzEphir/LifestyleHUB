@@ -1,4 +1,4 @@
-package com.ephirium.lifestylehub.androidBase
+package com.ephirium.lifestylehub.androidBase.utils
 
 import android.Manifest
 import android.content.Context

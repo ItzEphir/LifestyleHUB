@@ -1,4 +1,4 @@
-package com.ephirium.lifestylehub.androidBase
+package com.ephirium.lifestylehub.androidBase.composables
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background

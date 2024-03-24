@@ -29,7 +29,7 @@ class WeatherViewModel(
     
     val uiState: StateFlow<WeatherUiState> = savedStateHandle.getStateFlow(UI_STATE_KEY, Loading)
     
-    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun load(locationClient: LocationClient, languageCode: String) {
         if (uiState.value != Loading) {
             return
@@ -39,10 +39,6 @@ class WeatherViewModel(
             getLocation(locationClient).flatMapLatest { latitudeAndLongitude ->
                 val (latitude, longitude) = latitudeAndLongitude
                 getCurrentWeather(latitude, longitude, languageCode)
-            }.timeout(10.seconds).catch {
-                if (it is TimeoutCancellationException && uiState.value == Loading) {
-                    savedStateHandle[UI_STATE_KEY] = Timeout
-                }
             }.collect { responseResult ->
                 responseResult.onOk { weatherInfo ->
                     savedStateHandle[UI_STATE_KEY] = Success(weatherInfo.toUiModel())

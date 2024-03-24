@@ -1,6 +1,7 @@
 plugins {
     `java-library`
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.realm)
 }
 
 java {
@@ -8,15 +9,17 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-kotlin{
+kotlin {
     jvmToolchain(17)
 }
 
 dependencies{
     implementation(project(":common"))
     implementation(project(":domain"))
+    implementation(project(":database:placeInfo"))
     implementation(project(":api:weather"))
     implementation(project(":api:places"))
+    implementation(project(":api:placeDetails"))
     
     implementation(libs.coroutines)
     implementation(libs.koin.core)
@@ -27,7 +30,7 @@ dependencies{
     implementation(libs.ktor.client.serialization)
     implementation(libs.ktor.client.serialization.json)
     
-    implementation(libs.paging.common)
-    
     implementation(libs.junit)
+    
+    implementation(libs.realm)
 }

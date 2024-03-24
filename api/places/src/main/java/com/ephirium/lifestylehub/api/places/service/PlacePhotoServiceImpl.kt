@@ -8,14 +8,13 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.network.sockets.ConnectTimeoutException
 import io.ktor.client.network.sockets.SocketTimeoutException
-import io.ktor.client.plugins.ClientRequestException
-import io.ktor.client.plugins.HttpRequestTimeoutException
-import io.ktor.client.plugins.RedirectResponseException
-import io.ktor.client.plugins.ServerResponseException
+import io.ktor.client.plugins.*
 import io.ktor.client.request.get
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlin.time.Duration.Companion.seconds
+import kotlin.time.DurationUnit.MILLISECONDS
 
 class PlacePhotoServiceImpl(private val httpClient: HttpClient, private val apiKey: String) :
     PlacePhotoService {
@@ -25,6 +24,9 @@ class PlacePhotoServiceImpl(private val httpClient: HttpClient, private val apiK
                 url {
                     headers["Authorization"] = apiKey
                     parameters["classifications"] = "outdoor,indoor"
+                }
+                timeout {
+                    requestTimeoutMillis = 5.seconds.toLong(MILLISECONDS)
                 }
             }.body<List<PlacePhotoResponse>>().map { it.prefix + "original" + it.suffix })
         }.await()

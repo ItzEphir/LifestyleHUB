@@ -21,40 +21,25 @@ internal class PlacesRepositoryImpl(
     private val placePhotoService: PlacePhotoService,
 ) : PlacesRepository {
     
-    private var nextUrl: String? = null
-    
-    override suspend fun getPlaces(
-        latitude: Float,
-        longitude: Float,
-    ): Flow<ResponseResult<List<Place>>> = flow {
-        emit(placeService.getPlaces(latitude, longitude).onOk {
-            nextUrl = it.headerResponse.link
-        })
-    }.map { responseResult ->
-        responseResult.map { placesResponse ->
-            placesResponse.bodyResponse.results.map { it.toPlace(placesResponse.headerResponse.link?.getCursorFromUrl(), null) }
-        }
-    }.flowOn(Dispatchers.IO)
-    
     override suspend fun getPlacesPage(
         latitude: Float,
         longitude: Float,
         page: String?,
         perPage: Int,
+        languageCode: String,
     ): Flow<ResponseResult<List<Place>>> = flow {
-        emit(placeService.getPlacesPage(latitude, longitude, page, perPage))
+        emit(placeService.getPlacesPage(latitude, longitude, page, perPage, languageCode))
     }.map { responseResult ->
         responseResult.map { placesResponse ->
             placesResponse.bodyResponse.results.map { placeDto ->
-                when (val photoResult = placePhotoService.getPhotos(placeDto.id)) {
-                    is Ok -> placeDto.toPlace(
-                        placesResponse.headerResponse.link?.getCursorFromUrl().also { println("repository: $it") }, photoResult.data
-                    )
-                    
-                    else  -> placeDto.toPlace(
-                        placesResponse.headerResponse.link?.getCursorFromUrl(), null
-                    )
-                }
+                placeDto.toPlace(
+                    placesResponse.headerResponse.link?.getCursorFromUrl(),
+                    when (val photoResult = placePhotoService.getPhotos(placeDto.id)) {
+                        is Ok -> photoResult.data
+                        
+                        else  -> null
+                    }
+                )
             }
         }
     }.flowOn(Dispatchers.IO)

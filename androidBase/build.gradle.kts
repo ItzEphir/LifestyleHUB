@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ephirium.lifestylehub.composables"
+    namespace = "com.ephirium.lifestylehub.androidBase"
     compileSdk = 34
     
     defaultConfig {
@@ -23,19 +23,23 @@ android {
             )
         }
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlin{
+        jvmToolchain(17)
+    }
     buildFeatures {
         compose = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.10"
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+}
+
+kotlin{
+    jvmToolchain(17)
 }
 
 dependencies {
@@ -53,6 +57,8 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    
     implementation(libs.google.play.services.location)
     implementation(libs.koin.android)
+    implementation(libs.androidx.navigation.compose)
 }

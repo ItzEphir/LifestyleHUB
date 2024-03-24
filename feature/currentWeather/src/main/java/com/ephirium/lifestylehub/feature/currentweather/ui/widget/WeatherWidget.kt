@@ -18,13 +18,12 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ephirium.lifestylehub.androidBase.composables.Shimmer
+import com.ephirium.lifestylehub.androidBase.location.LocationClient
 import com.ephirium.lifestylehub.feature.currentweather.R
 import com.ephirium.lifestylehub.feature.currentweather.presentation.state.WeatherUiState.*
 import com.ephirium.lifestylehub.feature.currentweather.presentation.viewmodel.WeatherViewModel
 import com.ephirium.lifestylehub.feature.currentweather.ui.components.Weather
-import com.ephirium.lifestylehub.androidBase.Shimmer
-import com.ephirium.lifestylehub.androidBase.location.LocationClient
-import com.ephirium.lifestylehub.feature.currentweather.R.string
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 
@@ -54,19 +53,21 @@ fun WeatherWidget(
             })
         
         is Error, is Timeout, is HttpError, is LocationDenied -> Error(text = when (uiState) {
-            is LocationDenied        -> stringResource(string.location_denied)
-            is Timeout, is HttpError -> stringResource(string.network_error)
-            is Error                 -> stringResource(string.something_went_wrong)
-            else                     -> ""
+            is LocationDenied        -> stringResource(com.ephirium.lifestylehub.androidBase.R.string.location_denied)
+            is Timeout, is HttpError -> stringResource(com.ephirium.lifestylehub.androidBase.R.string.network_error)
+            is Error                 -> stringResource(com.ephirium.lifestylehub.androidBase.R.string.something_went_wrong)
+            else                     -> "" // Never reached
         }, onRefreshClick = { viewModel.reload(locationClient, Locale.current.language) })
     }
 }
 
 @Composable
 private fun Error(text: String, onRefreshClick: () -> Unit) {
-    Card(shape = RoundedCornerShape(24.dp), modifier = Modifier
-        .fillMaxWidth()
-        .height(128.dp)) {
+    Card(
+        shape = RoundedCornerShape(24.dp), modifier = Modifier
+            .fillMaxWidth()
+            .height(128.dp)
+    ) {
         Box(modifier = Modifier.fillMaxSize()) {
             Text(
                 text = text,

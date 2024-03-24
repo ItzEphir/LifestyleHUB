@@ -7,3 +7,9 @@ plugins {
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.parcelize) apply false
 }
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java).all {
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}

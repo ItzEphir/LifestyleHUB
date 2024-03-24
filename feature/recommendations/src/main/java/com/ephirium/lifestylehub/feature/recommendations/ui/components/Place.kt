@@ -1,5 +1,6 @@
 package com.ephirium.lifestylehub.feature.recommendations.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -14,18 +15,20 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.ephirium.lifestylehub.androidBase.Shimmer
+import com.ephirium.lifestylehub.androidBase.composables.Shimmer
 import com.ephirium.lifestylehub.feature.recommendations.presentation.model.PlaceUiModel
 
 @Composable
-fun Place(placeUiModel: PlaceUiModel, modifier: Modifier = Modifier) {
+fun Place(placeUiModel: PlaceUiModel, modifier: Modifier = Modifier, onClick: (String) -> Unit) {
     
     val photoUrls by remember {
         derivedStateOf { placeUiModel.photoUrls }
     }
     
     Card(
-        modifier = modifier, shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(
+        modifier = modifier.clickable { onClick(placeUiModel.id) },
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             contentColor = contentColorFor(backgroundColor = MaterialTheme.colorScheme.primaryContainer)
         )
@@ -41,7 +44,6 @@ fun Place(placeUiModel: PlaceUiModel, modifier: Modifier = Modifier) {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 items(items = photoUrls!!) {
-                    println(it)
                     AsyncImage(
                         model = it,
                         contentDescription = null,
@@ -72,14 +74,12 @@ fun Place(placeUiModel: PlaceUiModel, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun PlacePreview() {
-    Place(
-        placeUiModel = PlaceUiModel(
-            id = "",
-            name = "Red Square",
-            address = "",
-            categories = listOf("Avenue", "Place", "Cool"),
-            photoUrls = null
-        ), modifier = Modifier.fillMaxWidth()
-    )
+    Place(placeUiModel = PlaceUiModel(
+        id = "",
+        name = "Red Square",
+        address = "",
+        categories = listOf("Avenue", "Place", "Cool"),
+        photoUrls = null
+    ), modifier = Modifier.fillMaxWidth(), onClick = {})
     
 }

@@ -22,7 +22,8 @@ internal class PlaceServiceImpl(private val httpClient: HttpClient, private val 
     override suspend fun getPlaces(
         lat: Float,
         lon: Float,
-        limit: Int
+        limit: Int,
+        languageCode: String,
     ): ResponseResult<PlacesResponse> = try {
         val response = httpClient.get(HttpRoutes.FOURSQUARE_PLACES_SEARCH) {
             url {
@@ -31,7 +32,7 @@ internal class PlaceServiceImpl(private val httpClient: HttpClient, private val 
                 parameters["limit"] = limit.toString()
                 parameters["sort"] = "DISTANCE"
                 headers["Authorization"] = apiKey
-                headers["Accept-Language"] = "ru"
+                headers["Accept-Language"] = languageCode
             }
             timeout {
                 requestTimeoutMillis = 5.seconds.toLong(MILLISECONDS)
@@ -67,9 +68,10 @@ internal class PlaceServiceImpl(private val httpClient: HttpClient, private val 
         lon: Float,
         page: String?,
         perPage: Int,
+        languageCode: String,
     ): ResponseResult<PlacesResponse> {
         if (page == null) {
-            return getPlaces(lat, lon, perPage)
+            return getPlaces(lat, lon, perPage, languageCode)
         }
         return try {
             val response = httpClient.get(HttpRoutes.FOURSQUARE_PLACES_SEARCH) {
@@ -79,7 +81,7 @@ internal class PlaceServiceImpl(private val httpClient: HttpClient, private val 
                     parameters["fields"] = "fsq_id,name,location,categories,distance"
                     parameters["limit"] = perPage.toString()
                     headers["Authorization"] = apiKey
-                    headers["Accept-Language"] = "ru"
+                    headers["Accept-Language"] = languageCode
                 }
                 timeout {
                     requestTimeoutMillis = 5.seconds.toLong(MILLISECONDS)

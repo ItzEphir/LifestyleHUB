@@ -37,8 +37,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
+    kotlin {
+        jvmToolchain(17)
     }
     buildFeatures {
         buildConfig = true
@@ -52,6 +52,10 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+}
+
+kotlin{
+    jvmToolchain(17)
 }
 
 dependencies {
@@ -78,4 +82,5 @@ dependencies {
     
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
+    implementation(libs.androidx.navigation.compose)
 }

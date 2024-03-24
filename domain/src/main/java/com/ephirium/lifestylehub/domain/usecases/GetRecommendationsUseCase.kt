@@ -14,10 +14,11 @@ class GetRecommendationsUseCase(
     suspend operator fun invoke(
         latitude: Float,
         longitude: Float,
+        languageCode: String,
         page: String? = null,
         perPage: Int = 10,
     ): Flow<ResponseResult<List<Recommendation>>> =
-        placesRepository.getPlacesPage(latitude, longitude, page, perPage).map { responseResult ->
+        placesRepository.getPlacesPage(latitude, longitude, page, perPage, languageCode).map { responseResult ->
             responseResult.map { places ->
                 places.map { place ->
                     place

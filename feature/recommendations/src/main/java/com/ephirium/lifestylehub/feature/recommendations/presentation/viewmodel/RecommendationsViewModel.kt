@@ -18,6 +18,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.hours
+import kotlin.time.Duration.Companion.seconds
 import kotlin.time.DurationUnit.MILLISECONDS
 
 class RecommendationsViewModel(
@@ -32,7 +33,7 @@ class RecommendationsViewModel(
         )
     
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun load(locationClient: LocationClient) {
+    fun load(locationClient: LocationClient, languageCode: String) {
         viewModelScope.launch {
             getLocation(locationClient).flatMapLatest {
                 getRecommendationsUseCase(
@@ -47,12 +48,46 @@ class RecommendationsViewModel(
                         else       -> null
                     },
                     perPage = 10,
+                    languageCode = languageCode
                 )
             }.collectLatest { responseResult ->
                 responseResult.onOk { places ->
                     when (val state = uiState.value) {
                         is Success -> savedStateHandle[UI_STATE_KEY] =
-                            state.copy(state.recommendations + places.map { it.toUiModel() }.filter { it !in state.recommendations })
+                            state.copy(state.recommendations + places.map { it.toUiModel() }
+                                .filter { it !in state.recommendations })
+                        
+                        else       -> savedStateHandle[UI_STATE_KEY] =
+                            Success(places.map { it.toUiModel() })
+                    }
+                }.on<Error> {
+                    savedStateHandle[UI_STATE_KEY] = RecommendationsScreenState.Error
+                }.on<TimeoutError> {
+                    savedStateHandle[UI_STATE_KEY] = NetworkError
+                }.on<HttpResponse> {
+                    savedStateHandle[UI_STATE_KEY] = NetworkError
+                }
+            }
+        }
+    }
+    
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun reload(locationClient: LocationClient, languageCode: String) {
+        viewModelScope.launch {
+            getLocation(locationClient).flatMapLatest {
+                getRecommendationsUseCase(
+                    latitude = it.first,
+                    longitude = it.second,
+                    page = null,
+                    perPage = 10,
+                    languageCode = languageCode,
+                )
+            }.collectLatest { responseResult ->
+                responseResult.onOk { places ->
+                    when (val state = uiState.value) {
+                        is Success -> savedStateHandle[UI_STATE_KEY] =
+                            state.copy(state.recommendations + places.map { it.toUiModel() }
+                                .filter { it !in state.recommendations })
                         
                         else       -> savedStateHandle[UI_STATE_KEY] =
                             Success(places.map { it.toUiModel() })
@@ -69,7 +104,7 @@ class RecommendationsViewModel(
     }
     
     private fun getLocation(locationClient: LocationClient) =
-        locationClient.getLocationUpdates(1.hours.toLong(MILLISECONDS)).catch {
+        locationClient.getLocationUpdates(10.seconds.toLong(MILLISECONDS)).catch {
             if (it is LocationException) {
                 savedStateHandle[UI_STATE_KEY] = LocationDenied
             }
