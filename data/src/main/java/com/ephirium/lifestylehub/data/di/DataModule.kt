@@ -4,13 +4,16 @@ import com.ephirium.lifestylehub.api.placedetails.di.placeDetailsApiModule
 import com.ephirium.lifestylehub.api.places.di.recommendationsApiModule
 import com.ephirium.lifestylehub.api.randomuser.di.randomUserApiModule
 import com.ephirium.lifestylehub.data.createHttpClient
+import com.ephirium.lifestylehub.data.repositories.local.LeisureLocalRepositoryImpl
 import com.ephirium.lifestylehub.data.repositories.local.PlaceInfoLocalRepositoryImpl
 import com.ephirium.lifestylehub.data.repositories.local.UserLocalRepositoryImpl
 import com.ephirium.lifestylehub.data.repositories.remote.*
 import com.ephirium.lifestylehub.data.repositories.remote.PlacePhotoRepositoryImpl
-import com.ephirium.lifestylehub.data.repositories.remote.PlacesRepositoryImpl
+import com.ephirium.lifestylehub.data.repositories.remote.PlacesRemoteRepositoryImpl
+import com.ephirium.lifestylehub.database.leisure.di.leisureDatabaseModule
 import com.ephirium.lifestylehub.database.placeinfo.di.placeInfoDatabaseModule
 import com.ephirium.lifestylehub.database.users.di.usersDatabaseModule
+import com.ephirium.lifestylehub.domain.repositories.local.LeisureLocalRepository
 import com.ephirium.lifestylehub.domain.repositories.local.PlaceInfoLocalRepository
 import com.ephirium.lifestylehub.domain.repositories.local.UserLocalRepository
 import com.ephirium.lifestylehub.domain.repositories.remote.*
@@ -23,11 +26,11 @@ import org.koin.dsl.module
 val dataModule = module {
     includes(weatherApiModule, recommendationsApiModule, placeDetailsApiModule, randomUserApiModule)
     
-    includes(placeInfoDatabaseModule, usersDatabaseModule)
+    includes(placeInfoDatabaseModule, usersDatabaseModule, leisureDatabaseModule)
     
-    singleOf(::WeatherRepositoryImpl) bind WeatherRepository::class
+    singleOf(::WeatherRemoteRepositoryImpl) bind WeatherRemoteRepository::class
     
-    singleOf(::PlacesRepositoryImpl) bind PlacesRepository::class
+    singleOf(::PlacesRemoteRepositoryImpl) bind PlacesRemoteRepository::class
     
     singleOf(::PlacePhotoRepositoryImpl) bind PlacePhotoRepository::class
     
@@ -38,6 +41,8 @@ val dataModule = module {
     singleOf(::UserRemoteRepositoryImpl) bind UserRemoteRepository::class
     
     singleOf(::UserLocalRepositoryImpl) bind UserLocalRepository::class
+    
+    singleOf(::LeisureLocalRepositoryImpl) bind LeisureLocalRepository::class
     
     single {
         createHttpClient()

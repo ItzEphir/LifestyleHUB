@@ -8,6 +8,7 @@ import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.seconds
 
 object MockGeoService : GeoService {
+    @Suppress("SpellCheckingInspection")
     override suspend fun getCityName(lat: Float, lon: Float): ResponseResult<ReverseGeoResponse> {
         delay(1.seconds)
         return Ok(

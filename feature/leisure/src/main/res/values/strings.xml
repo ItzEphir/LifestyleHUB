@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name_placeholder">Name</string>
+    <string name="detail_placeholder">Detail</string>
+    <string name="add_detail_button">Add Detail</string>
+    <string name="note_placeholder">Note</string>
+    <string name="add_note_button">Add Note</string>
+    <string name="submit_button">Submit</string>
+</resources>

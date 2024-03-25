@@ -18,6 +18,7 @@ dependencies{
     implementation(project(":domain"))
     implementation(project(":database:placeInfo"))
     implementation(project(":database:users"))
+    implementation(project(":database:leisure"))
     implementation(project(":api:weather"))
     implementation(project(":api:places"))
     implementation(project(":api:placeDetails"))

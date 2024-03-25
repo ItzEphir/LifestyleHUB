@@ -1,5 +1,6 @@
 package com.ephirium.lifestylehub.feature.recommendations.ui.screen
 
+import android.location.Location
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,8 +24,11 @@ import com.ephirium.lifestylehub.androidBase.location.LocationClient
 import com.ephirium.lifestylehub.feature.recommendations.presentation.state.RecommendationsScreenState.*
 import com.ephirium.lifestylehub.feature.recommendations.presentation.viewmodel.RecommendationsViewModel
 import com.ephirium.lifestylehub.feature.recommendations.ui.components.Recommendations
+import kotlinx.coroutines.flow.catch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
+import kotlin.time.Duration.Companion.seconds
+import kotlin.time.DurationUnit.MILLISECONDS
 
 @Composable
 fun RecommendationsScreen(
@@ -35,9 +39,13 @@ fun RecommendationsScreen(
     
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     
-    LaunchedEffect(key1 = Unit) {
+    val location = locationClient.getLocationUpdates(10.seconds.toLong(MILLISECONDS))
+        .catch<Location?> { emit(null) }.collectAsStateWithLifecycle(initialValue = null)
+    
+    LaunchedEffect(key1 = location) {
         viewModel.reload(locationClient, Locale.current.language)
     }
+    
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -81,9 +89,9 @@ private fun BoxScope.ErrorMessage(text: String, onRefreshClick: () -> Unit) {
         modifier = Modifier.align(Alignment.Center)
     )
     
-    IconButton(onClick = onRefreshClick) {
+    IconButton(onClick = onRefreshClick, modifier = Modifier.align(Alignment.TopEnd)) {
         Icon(
-            painter = painterResource(id = com.ephirium.lifestylehub.feature.currentweather.R.drawable.cached),
+            painter = painterResource(id = com.ephirium.lifestylehub.androidBase.R.drawable.cached),
             contentDescription = null,
         )
     }

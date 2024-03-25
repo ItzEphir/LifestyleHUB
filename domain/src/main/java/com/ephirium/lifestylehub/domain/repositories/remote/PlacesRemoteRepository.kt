@@ -4,7 +4,7 @@ import com.ephirium.lifestylehub.common.ResponseResult
 import com.ephirium.lifestylehub.domain.model.recommendation.Place
 import kotlinx.coroutines.flow.Flow
 
-interface PlacesRepository {
+interface PlacesRemoteRepository {
     
     suspend fun getPlacesPage(
         latitude: Float,

@@ -4,6 +4,6 @@ import com.ephirium.lifestylehub.feature.profile.presentation.viewmodel.AuthView
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
-val authFeatureModule = module {
+val profileFeatureModule = module {
     viewModelOf(::AuthViewModel)
 }

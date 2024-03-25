@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name_placeholder">Имя</string>
+    <string name="detail_placeholder">Дополнение</string>
+    <string name="add_detail_button">Добавить дополнение</string>
+    <string name="note_placeholder">Заметка</string>
+    <string name="add_note_button">Добавить заметку</string>
+    <string name="submit_button">Готово</string>
+</resources>

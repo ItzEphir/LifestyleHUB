@@ -6,7 +6,6 @@ import io.realm.kotlin.UpdatePolicy.ALL
 import io.realm.kotlin.ext.asFlow
 import io.realm.kotlin.ext.query
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 
 class UsersDatastoreImpl : UsersDatastore {

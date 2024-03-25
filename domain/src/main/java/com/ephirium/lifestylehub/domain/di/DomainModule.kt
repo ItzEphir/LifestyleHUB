@@ -16,4 +16,8 @@ val domainModule = module {
     factoryOf(::SignUpUseCase)
     
     factoryOf(::GetCurrentUserUseCase)
+    
+    factoryOf(::GetLeisureUseCase)
+    
+    factoryOf(::PostLeisureUseCase)
 }

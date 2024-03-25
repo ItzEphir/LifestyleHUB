@@ -5,8 +5,9 @@ import com.ephirium.lifestylehub.androidBase.di.androidBaseModule
 import com.ephirium.lifestylehub.androidBase.navigation.ScreenProvider
 import com.ephirium.lifestylehub.data.di.dataModule
 import com.ephirium.lifestylehub.domain.di.domainModule
-import com.ephirium.lifestylehub.feature.profile.di.authFeatureModule
+import com.ephirium.lifestylehub.feature.profile.di.profileFeatureModule
 import com.ephirium.lifestylehub.feature.currentweather.di.currentWeatherFeatureModule
+import com.ephirium.lifestylehub.feature.leisure.di.leisureFeatureModule
 import com.ephirium.lifestylehub.feature.placedetails.di.placeDetailsFeatureModule
 import com.ephirium.lifestylehub.feature.recommendations.di.recommendationsFeatureModule
 import com.ephirium.lifestylehub.ui.navigation.ScreenProviderImpl
@@ -20,7 +21,8 @@ val appModule = module {
         currentWeatherFeatureModule,
         recommendationsFeatureModule,
         placeDetailsFeatureModule,
-        authFeatureModule
+        profileFeatureModule,
+        leisureFeatureModule,
     )
     includes(dataModule, domainModule)
     

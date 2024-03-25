@@ -19,11 +19,8 @@ koin = "3.5.3"
 ktor = "2.3.8"
 coil = "2.6.0"
 google-play-services = "21.2.0"
-paging = "3.2.1"
 
 realm = "1.14.1"
-appcompat = "1.6.1"
-material = "1.11.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core" }

@@ -55,7 +55,8 @@ fun Weather(
                 
                 IconButton(modifier = Modifier.align(Alignment.TopEnd), onClick = onRefreshClick) {
                     Icon(
-                        painter = painterResource(id = R.drawable.cached), contentDescription = null
+                        painter = painterResource(id = com.ephirium.lifestylehub.androidBase.R.drawable.cached),
+                        contentDescription = null,
                     )
                 }
             }
@@ -92,7 +93,8 @@ fun Weather(
                         style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier
                             .padding(bottom = 5.dp)
-                            .align(Alignment.CenterHorizontally).widthIn(0.dp, 128.dp),
+                            .align(Alignment.CenterHorizontally)
+                            .widthIn(0.dp, 128.dp),
                         textAlign = TextAlign.Center,
                         maxLines = 4,
                     )

@@ -2,7 +2,6 @@ package com.ephirium.lifestylehub.database.users
 
 import com.ephirium.lifestylehub.database.users.model.UserEntity
 import io.realm.kotlin.Realm
-import io.realm.kotlin.Realm.Companion
 import io.realm.kotlin.RealmConfiguration
 
 internal object UsersDatabase {

@@ -14,5 +14,8 @@ object NavigationRoutes {
     private const val RECOMMENDATION = "recommendation"
     const val RECOMMENDATION_MASK = "$RECOMMENDATION/{recommendation_id}"
     
+    const val ADD_ACTIVITY_SHORTCUT = "add_activity"
+    const val ADD_ACTIVITY_SHORTCUT_MASK = "$ADD_ACTIVITY_SHORTCUT/{recommendation_id}/{details}"
+    
     fun recommendation(id: String) = "$RECOMMENDATION/$id"
 }

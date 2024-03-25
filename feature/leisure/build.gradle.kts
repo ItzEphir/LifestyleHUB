@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android)
+    alias(libs.plugins.parcelize)
 }
 
 android {
@@ -65,4 +66,6 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
+    
+    implementation(libs.coil)
 }

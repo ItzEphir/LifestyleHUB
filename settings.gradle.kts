@@ -1,15 +1,5 @@
 // for dependencyResolutionManagement
 @file:Suppress("UnstableApiUsage")
-
-include(":auth")
-
-
-include(":api:randomUser")
-
-
-include(":database:users")
-
-
 pluginManagement {
     repositories {
         google {
@@ -33,6 +23,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "LifestyleHUB"
 include(":androidBase")
+include(":auth")
 include(":common")
 include(":app")
 include(":feature:currentWeather")
@@ -43,6 +34,9 @@ include(":feature:leisure")
 include(":domain")
 include(":data")
 include(":database:placeInfo")
+include(":database:users")
+include(":database:leisure")
 include(":api:placeDetails")
 include(":api:weather")
 include(":api:places")
+include(":api:randomUser")

@@ -13,13 +13,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.intl.Locale
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ephirium.lifestylehub.androidBase.composables.Shimmer
+import com.ephirium.lifestylehub.feature.placedetails.presentation.model.PlaceUiModel
 import com.ephirium.lifestylehub.feature.placedetails.presentation.state.PlaceUiState.*
 import com.ephirium.lifestylehub.feature.placedetails.presentation.viewmodel.PlaceViewModel
 import com.ephirium.lifestylehub.feature.placedetails.ui.components.PlaceDetails
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun PlaceDetailsScreen(id: String, viewModel: PlaceViewModel = koinViewModel()) {
+fun PlaceDetailsScreen(
+    id: String,
+    viewModel: PlaceViewModel = koinViewModel(),
+    onAddLeisureClick: (PlaceUiModel) -> Unit,
+) {
     
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     
@@ -33,7 +38,10 @@ fun PlaceDetailsScreen(id: String, viewModel: PlaceViewModel = koinViewModel()) 
                 placeUiModel = (uiState.value as Success).placeUiModel,
                 modifier = Modifier
                     .fillMaxSize()
-                    .align(Alignment.Center)
+                    .align(Alignment.Center),
+                onAddLeisureClick = {
+                    onAddLeisureClick((uiState.value as Success).placeUiModel)
+                },
             )
             
             Error      -> Text(

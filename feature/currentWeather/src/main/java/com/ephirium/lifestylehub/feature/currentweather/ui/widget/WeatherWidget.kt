@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ephirium.lifestylehub.androidBase.composables.Shimmer
 import com.ephirium.lifestylehub.androidBase.location.LocationClient
-import com.ephirium.lifestylehub.feature.currentweather.R
 import com.ephirium.lifestylehub.feature.currentweather.presentation.state.WeatherUiState.*
 import com.ephirium.lifestylehub.feature.currentweather.presentation.viewmodel.WeatherViewModel
 import com.ephirium.lifestylehub.feature.currentweather.ui.components.Weather
@@ -78,7 +77,10 @@ private fun Error(text: String, onRefreshClick: () -> Unit) {
                 )
             )
             IconButton(onClick = onRefreshClick, modifier = Modifier.align(Alignment.TopEnd)) {
-                Icon(painter = painterResource(id = R.drawable.cached), contentDescription = null)
+                Icon(
+                    painter = painterResource(id = com.ephirium.lifestylehub.androidBase.R.drawable.cached),
+                    contentDescription = null,
+                )
             }
         }
     }

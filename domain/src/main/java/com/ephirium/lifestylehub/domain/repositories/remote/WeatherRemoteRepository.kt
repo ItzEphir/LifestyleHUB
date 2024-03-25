@@ -4,7 +4,7 @@ import com.ephirium.lifestylehub.common.ResponseResult
 import com.ephirium.lifestylehub.domain.model.weather.WeatherInfo
 import kotlinx.coroutines.flow.Flow
 
-interface WeatherRepository {
+interface WeatherRemoteRepository {
     suspend fun getWeatherInfo(
         latitude: Float,
         longitude: Float,

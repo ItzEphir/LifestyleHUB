@@ -12,12 +12,12 @@ import io.ktor.client.network.sockets.ConnectTimeoutException
 import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.plugins.*
 import io.ktor.client.request.get
-import io.ktor.client.statement.bodyAsText
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.DurationUnit.MILLISECONDS
 
 internal class UserServiceImpl(private val httpClient: HttpClient, private val apiKey: String) :
     UserService {
+    @Suppress("SpellCheckingInspection")
     override suspend fun getUser(): ResponseResult<UserResponse> = try {
         Ok(httpClient.get("${HttpRoutes.RANDOM_USER}/98v7yepo") {
             url {
