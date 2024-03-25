@@ -4,4 +4,6 @@
     <string name="location_denied">Доступ к местоположению запрещен</string>
     <string name="network_error">Проблема с доступом к интернету</string>
     <string name="something_went_wrong">Что-то пошло не так…</string>
+    <string name="sign_in">Войти</string>
+    <string name="sign_up">Зарегестрироваться</string>
 </resources>

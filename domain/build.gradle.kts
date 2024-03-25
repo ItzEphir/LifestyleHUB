@@ -17,6 +17,4 @@ dependencies{
     
     implementation(libs.coroutines)
     implementation(libs.koin.core)
-    
-    implementation(libs.paging.common)
 }

@@ -24,6 +24,7 @@ android {
         all{
             buildConfigField("String", "WEATHER_API_KEY", "\"dbaad18638759894a816af331cfb5672\"")
             buildConfigField("String", "PLACES_API_KEY", "\"fsq3I0lJ8GNhhnjGhdkHT/CGqrMe5o+cEDLPms2+o6fSG90=\"")
+            buildConfigField("String", "RANDOM_USER_API_KEY", "\"PUZ4-1ZWF-Y25Y-RTYN\"")
         }
         release {
             isMinifyEnabled = false
@@ -60,6 +61,7 @@ dependencies {
     implementation(project(":feature:currentWeather"))
     implementation(project(":feature:recommendations"))
     implementation(project(":feature:placeDetails"))
+    implementation(project(":feature:profile"))
     implementation(project(":data"))
     implementation(project(":domain"))
     

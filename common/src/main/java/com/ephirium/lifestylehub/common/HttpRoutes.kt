@@ -8,4 +8,6 @@ object HttpRoutes {
     private const val FOURSQUARE = "https://api.foursquare.com"
     const val FOURSQUARE_PLACES = "$FOURSQUARE/v3/places"
     const val FOURSQUARE_PLACES_SEARCH = "$FOURSQUARE_PLACES/search"
+    
+    const val RANDOM_USER = "https://randomapi.com/api/"
 }

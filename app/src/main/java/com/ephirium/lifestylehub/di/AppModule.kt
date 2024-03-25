@@ -5,6 +5,7 @@ import com.ephirium.lifestylehub.androidBase.di.androidBaseModule
 import com.ephirium.lifestylehub.androidBase.navigation.ScreenProvider
 import com.ephirium.lifestylehub.data.di.dataModule
 import com.ephirium.lifestylehub.domain.di.domainModule
+import com.ephirium.lifestylehub.feature.profile.di.authFeatureModule
 import com.ephirium.lifestylehub.feature.currentweather.di.currentWeatherFeatureModule
 import com.ephirium.lifestylehub.feature.placedetails.di.placeDetailsFeatureModule
 import com.ephirium.lifestylehub.feature.recommendations.di.recommendationsFeatureModule
@@ -15,7 +16,12 @@ import org.koin.dsl.module
 
 val appModule = module {
     includes(androidBaseModule)
-    includes(currentWeatherFeatureModule, recommendationsFeatureModule, placeDetailsFeatureModule)
+    includes(
+        currentWeatherFeatureModule,
+        recommendationsFeatureModule,
+        placeDetailsFeatureModule,
+        authFeatureModule
+    )
     includes(dataModule, domainModule)
     
     single(named("weather_api_key")) {
@@ -24,6 +30,10 @@ val appModule = module {
     
     single(named("places_api_key")) {
         BuildConfig.PLACES_API_KEY
+    }
+    
+    single(named("random_user_api_key")){
+        BuildConfig.RANDOM_USER_API_KEY
     }
     
     single {

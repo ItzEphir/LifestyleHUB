@@ -17,9 +17,12 @@ dependencies{
     implementation(project(":common"))
     implementation(project(":domain"))
     implementation(project(":database:placeInfo"))
+    implementation(project(":database:users"))
     implementation(project(":api:weather"))
     implementation(project(":api:places"))
     implementation(project(":api:placeDetails"))
+    implementation(project(":api:randomUser"))
+    implementation(project(":auth"))
     
     implementation(libs.coroutines)
     implementation(libs.koin.core)
