@@ -1,3 +1,10 @@
 package com.ephirium.lifestylehub.database.placeinfo.model
 
-data class Hours(val close: String, val day: Int, val open: String)
+import io.realm.kotlin.types.EmbeddedRealmObject
+import io.realm.kotlin.types.RealmObject
+
+class Hours: EmbeddedRealmObject {
+    var close: String = ""
+    var day: Int = 0
+    var open: String = ""
+}

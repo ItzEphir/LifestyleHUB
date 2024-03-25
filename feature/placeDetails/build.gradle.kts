@@ -38,15 +38,10 @@ android {
     }
 }
 
-kotlin{
-    jvmToolchain(17)
-}
-
 dependencies {
-    
     implementation(project(":common"))
-    implementation(project(":domain"))
     implementation(project(":data"))
+    implementation(project(":domain"))
     implementation(project(":androidBase"))
     
     implementation(libs.androidx.core.ktx)
@@ -66,6 +61,10 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     
+    implementation(libs.coroutines)
     implementation(libs.koin.core)
+    implementation(libs.koin.android)
     implementation(libs.koin.compose)
+    
+    implementation(libs.coil)
 }

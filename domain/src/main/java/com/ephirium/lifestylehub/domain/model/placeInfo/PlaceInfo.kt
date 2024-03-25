@@ -8,8 +8,9 @@ data class PlaceInfo(
     val dateClosed: String?,
     val description: String,
     val email: String?,
+    val telephone: String?,
     val link: String?,
     val address: String,
     val hours: List<Hours>?,
-    val photos: List<String>
+    val photos: List<String>,
 )

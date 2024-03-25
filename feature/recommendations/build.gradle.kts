@@ -19,8 +19,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -28,7 +27,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlin{
+    kotlin {
         jvmToolchain(17)
     }
     buildFeatures {
@@ -37,10 +36,6 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.10"
     }
-}
-
-kotlin{
-    jvmToolchain(17)
 }
 
 dependencies {
@@ -75,6 +70,4 @@ dependencies {
     implementation(libs.coil)
     
     implementation(libs.google.play.services.location)
-    implementation(libs.paging.runtime)
-    implementation(libs.paging.compose)
 }

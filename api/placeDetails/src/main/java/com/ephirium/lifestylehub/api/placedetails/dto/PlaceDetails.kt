@@ -12,6 +12,6 @@ data class PlaceDetails(
     val email: String?,
     val telephone: String?,
     val hours: List<Hours>?,
-    val link: String?,
+    val website: String?,
     val photos: List<String>,
 )

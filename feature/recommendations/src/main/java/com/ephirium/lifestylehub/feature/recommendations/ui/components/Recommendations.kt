@@ -52,7 +52,7 @@ fun Recommendations(
             modifier = modifier,
             verticalArrangement = Arrangement.spacedBy(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            state = lazyListState
+            state = lazyListState,
         ) {
             if (!pullToRefreshState.isRefreshing) {
                 item {

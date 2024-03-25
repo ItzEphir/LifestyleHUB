@@ -94,7 +94,7 @@ fun MainScaffold(screenProvider: ScreenProvider) {
         NavHost(
             navController = navController,
             startDestination = NavigationRoutes.HOME,
-            modifier = androidx.compose.ui.Modifier.padding(paddingValues)
+            modifier = Modifier.padding(paddingValues)
         ) {
             mainGraph(navController, screenProvider)
         }

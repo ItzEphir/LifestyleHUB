@@ -22,6 +22,8 @@ class PlaceDetailsServiceImpl(private val httpClient: HttpClient, private val ap
         id: String,
         languageCode: String,
     ): ResponseResult<PlaceDetails> = try {
+        println(id)
+        println(apiKey)
         Ok(httpClient.get("${HttpRoutes.FOURSQUARE_PLACES}/$id") {
             url {
                 headers["Authorization"] = apiKey
@@ -30,7 +32,10 @@ class PlaceDetailsServiceImpl(private val httpClient: HttpClient, private val ap
             timeout {
                 requestTimeoutMillis = 5.seconds.toLong(MILLISECONDS)
             }
-        }.body<PlaceDetailsResponse>().toPlaceDetails())
+            println(url)
+        }.body<PlaceDetailsResponse>().toPlaceDetails().also {
+            println(it)
+        })
     } catch (e: RedirectResponseException) {
         Redirection(e.response.status.value)
     } catch (e: ClientRequestException) {

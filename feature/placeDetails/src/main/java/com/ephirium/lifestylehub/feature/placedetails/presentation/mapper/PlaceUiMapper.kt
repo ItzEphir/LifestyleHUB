@@ -13,8 +13,9 @@ fun PlaceInfo.toPlaceUi() = PlaceUiModel(
     description = description,
     email = email,
     hours = hours?.map { it.toUi() },
-    link = link,
+    website = link,
     photos = photos,
+    telephone = telephone
 )
 
 private fun Hours.toUi() = PlaceUiModel.Hours(

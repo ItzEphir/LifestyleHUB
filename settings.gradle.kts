@@ -1,5 +1,6 @@
 // for dependencyResolutionManagement
 @file:Suppress("UnstableApiUsage")
+
 pluginManagement {
     repositories {
         google {
@@ -28,6 +29,8 @@ include(":app")
 include(":feature:currentWeather")
 include(":feature:recommendations")
 include(":feature:placeDetails")
+include(":feature:auth")
+include(":feature:leisure")
 include(":domain")
 include(":data")
 include(":database:placeInfo")

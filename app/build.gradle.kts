@@ -23,7 +23,7 @@ android {
     buildTypes {
         all{
             buildConfigField("String", "WEATHER_API_KEY", "\"dbaad18638759894a816af331cfb5672\"")
-            buildConfigField("String", "PLACES_API_KEY", "\"fsq3NTnGNMK/0cje7JYavQTeDK24QqQBUEb3UzhVu2L8/hg=\"")
+            buildConfigField("String", "PLACES_API_KEY", "\"fsq3I0lJ8GNhhnjGhdkHT/CGqrMe5o+cEDLPms2+o6fSG90=\"")
         }
         release {
             isMinifyEnabled = false
@@ -54,15 +54,14 @@ android {
     }
 }
 
-kotlin{
-    jvmToolchain(17)
-}
-
 dependencies {
     
     implementation(project(":androidBase"))
     implementation(project(":feature:currentWeather"))
     implementation(project(":feature:recommendations"))
+    implementation(project(":feature:placeDetails"))
+    implementation(project(":data"))
+    implementation(project(":domain"))
     
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

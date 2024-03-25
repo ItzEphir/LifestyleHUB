@@ -21,7 +21,9 @@ coil = "2.6.0"
 google-play-services = "21.2.0"
 paging = "3.2.1"
 
-realm = "1.11.0"
+realm = "1.14.1"
+appcompat = "1.6.1"
+material = "1.11.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core" }
@@ -67,6 +69,8 @@ paging-runtime = { group = "androidx.paging", name = "paging-runtime-ktx", versi
 paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging" }
 
 realm = { group = "io.realm.kotlin", name = "library-base", version.ref = "realm" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 application = { id = "com.android.application", version.ref = "agp" }

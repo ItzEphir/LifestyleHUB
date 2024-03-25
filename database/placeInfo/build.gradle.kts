@@ -1,7 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
-import org.jetbrains.kotlin.gradle.internal.Kapt3GradleSubplugin.Companion.isKaptVerbose
-import org.jetbrains.kotlin.gradle.plugin.kotlinToolingVersion
-
 plugins {
     id("java-library")
     alias(libs.plugins.kotlin.jvm)
@@ -14,9 +10,6 @@ java {
 }
 
 kotlin{
-    this.compilerOptions{
-        jvmTarget.set(JVM_17)
-    }
     jvmToolchain(17)
 }
 

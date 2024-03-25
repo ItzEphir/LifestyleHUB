@@ -6,13 +6,13 @@ import com.ephirium.lifestylehub.api.placedetails.dto.placeDetailsReponse.PlaceD
 fun PlaceDetailsResponse.toPlaceDetails() = PlaceDetails(
     id = id,
     name = name,
-    description = description,
+    description = description ?: "",
     address = location.address,
     categories = categories.map { it.name },
     email = email,
     telephone = tel,
     dateClosed = dateClosed,
     hours = hours,
-    link = link,
+    website = website,
     photos = photos.map { it.prefix + "original" + it.suffix },
 )
