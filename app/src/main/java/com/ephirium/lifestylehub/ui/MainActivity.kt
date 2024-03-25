@@ -10,12 +10,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.app.ActivityCompat
 import com.ephirium.lifestylehub.androidBase.navigation.ScreenProvider
-import com.ephirium.lifestylehub.feature.placedetails.presentation.viewmodel.PlaceViewModel
 import com.ephirium.lifestylehub.ui.components.MainScaffold
 import com.ephirium.lifestylehub.ui.theme.LifestyleHUBTheme
 import org.koin.android.ext.android.inject
 import org.koin.androidx.compose.KoinAndroidContext
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
 class MainActivity : ComponentActivity() {
