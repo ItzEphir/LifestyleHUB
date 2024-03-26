@@ -69,10 +69,6 @@ fun NavGraphBuilder.mainGraph(navController: NavController, screenProvider: Scre
     ) { navBackStackEntry ->
         val recommendationId = navBackStackEntry.arguments?.getString("recommendation_id") ?: ""
         val detail = navBackStackEntry.arguments?.getString("details") ?: ""
-        
-        println(recommendationId)
-        println(detail)
-        
         AddActivityScreenShortcut(
             details = listOf(ActivityDetail(detail)),
             onBack = {

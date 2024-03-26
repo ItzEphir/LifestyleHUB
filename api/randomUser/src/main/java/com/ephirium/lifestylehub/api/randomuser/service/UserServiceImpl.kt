@@ -26,7 +26,7 @@ internal class UserServiceImpl(private val httpClient: HttpClient, private val a
             timeout {
                 requestTimeoutMillis = 5.seconds.toLong(MILLISECONDS)
             }
-        }.body<BodyResponse>().results[0].also { println(it) })
+        }.body<BodyResponse>().results[0])
     } catch (e: RedirectResponseException) {
         Redirection(e.response.status.value)
     } catch (e: ClientRequestException) {

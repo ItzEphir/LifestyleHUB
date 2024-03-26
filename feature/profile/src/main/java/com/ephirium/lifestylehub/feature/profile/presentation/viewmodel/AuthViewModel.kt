@@ -60,7 +60,6 @@ class AuthViewModel(
                     savedStateHandle[USER] = user.toUi()
                     onOk()
                 }.on<ResponseResult.Error> {
-                    it.exception.printStackTrace()
                     onError()
                 }
             }
@@ -74,13 +73,10 @@ class AuthViewModel(
                     savedStateHandle[USER] = user.toUi()
                     onOk()
                 }.on<ResponseResult.Error> {
-                    it.exception.printStackTrace()
                     onError()
                 }.on<ResponseResult.TimeoutError> {
-                    it.exception.printStackTrace()
                     onError()
                 }.on<ResponseResult.HttpResponse> {
-                    println(it.code)
                     onError()
                 }
             }

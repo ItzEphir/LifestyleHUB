@@ -24,7 +24,6 @@ fun PlaceDetails(
     modifier: Modifier = Modifier,
     onAddLeisureClick: () -> Unit,
 ) {
-    println(placeUiModel.photos)
     LazyColumn(modifier = modifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
         item {
             LazyRow {
