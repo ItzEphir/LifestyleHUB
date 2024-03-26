@@ -8,7 +8,6 @@ import com.ephirium.lifestylehub.data.repositories.local.LeisureLocalRepositoryI
 import com.ephirium.lifestylehub.data.repositories.local.PlaceInfoLocalRepositoryImpl
 import com.ephirium.lifestylehub.data.repositories.local.UserLocalRepositoryImpl
 import com.ephirium.lifestylehub.data.repositories.remote.*
-import com.ephirium.lifestylehub.data.repositories.remote.PlacePhotoRepositoryImpl
 import com.ephirium.lifestylehub.data.repositories.remote.PlacesRemoteRepositoryImpl
 import com.ephirium.lifestylehub.database.leisure.di.leisureDatabaseModule
 import com.ephirium.lifestylehub.database.placeinfo.di.placeInfoDatabaseModule
@@ -31,8 +30,6 @@ val dataModule = module {
     singleOf(::WeatherRemoteRepositoryImpl) bind WeatherRemoteRepository::class
     
     singleOf(::PlacesRemoteRepositoryImpl) bind PlacesRemoteRepository::class
-    
-    singleOf(::PlacePhotoRepositoryImpl) bind PlacePhotoRepository::class
     
     singleOf(::PlaceInfoRemoteRepositoryImpl) bind PlaceInfoRemoteRepository::class
     

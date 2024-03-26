@@ -1,14 +1,16 @@
 # LifecycleHUB
 
-**Важно! Перед запуском проекта вставьте свой api key от [openweathermap.org](https://openweathermap.org) как переменную
-окружения в api:weather по ключу OPEN_WEATHER_MAP_API_KEY**
-
 ###### Проект для олимпиады PROD. Уловие задания доступно в [Notion](https://centraluniversity.notion.site/PROD-a404fd65bd6044da83fdf60859ff7733).
 
 ## Описание
 
-### тут будет описание проекта
+### LifestyleHub - приложение для формирования досуга. В реализованный функционал вошло:
+1. Виджет погоды
+2. Лента рекомендаций мест
+3. Информация о месте
+4. Профиль
+5. Планнер досуга
 
-## [Архитектура проекта](/docs/Architecture.md)
+## [Архитектура проекта](docs/Architecture.md)
 
 ## [Зависимости](docs/DependencyDecisions.md)
